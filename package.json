@@ -1,0 +1,25 @@
+{
+  "name": "hanoi",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-scripts": "2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "airbnb"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
