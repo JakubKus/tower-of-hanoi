@@ -1,0 +1,54 @@
+body {
+  background-color: #004400;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tower {
+  align-items: center;
+  background-color: #552700;
+  border: 2px solid #440026;
+  color: #55AA55;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column;
+  height: 50vh;
+  justify-content: flex-end;
+  max-width: 250px;
+  transition: border-color 0.3s;
+  width: 30%;
+
+  &:hover {
+    border-color: #804515;
+  }
+
+  > div {
+    align-items: center;
+    background-color: #804515;
+    border: 2px solid #55AA55;
+    display: flex;
+    height: 8vh;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .one {
+    width: 30%;
+  }
+
+  .two {
+    width: 50%;
+  }
+
+  .three {
+    width: 70%;
+  }
+
+  .four {
+    width: 90%;
+  }
+}
