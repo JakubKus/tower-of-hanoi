@@ -5,5 +5,5 @@ It's a mathematical game Tower of Hanoi embedded in React with graphic design<br
 <ul>
   <li>Moves counter</li>
   <li>Possibility to revert the move</li>
-  <li>Run with <code>npm install && npm start</code>/li>
+  <li>Run with <code>npm install && npm start</code></li>
 </ul>
