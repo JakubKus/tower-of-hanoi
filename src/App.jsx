@@ -1,47 +1,82 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { selectTower } from './actions';
 import './app.scss';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstTower: [
-        { id: 1, class: 'one' },
-        { id: 2, class: 'two' },
-        { id: 3, class: 'three' },
-        { id: 4, class: 'four' },
-      ],
-      secondTower: [],
-      thirdTower: [],
-    };
-  }
+export class App extends Component {
+  handleTowerClick = (id) => {
+    const { selectedTower, towers } = this.props;
+
+    if (selectedTower < 0) {
+      this.props.selectTower(id);
+    } else {
+      const fromTower = towers[selectedTower];
+      const toTower = towers[id];
+
+      if (this.canMoveDisk(fromTower, toTower)) {
+        const disk = fromTower.shift();
+        toTower.unshift(disk);
+      }
+
+      this.props.selectTower(-1);
+    }
+  };
+
+  canMoveDisk = (fromTower, toTower) => {
+    const fromTopDisk = fromTower.length > 0 ? fromTower[0] : false;
+    const toTopDisk = toTower.length > 0 ? toTower[0] : false;
+
+    if (fromTopDisk) {
+      if (toTopDisk && toTopDisk.id > fromTopDisk.id) {
+        return true;
+      }
+
+      return !toTopDisk;
+    }
+    return false;
+  };
 
   render() {
-    const { firstTower, secondTower, thirdTower } = this.state;
+    const { towers, selectedTower } = this.props;
+
     return (
-      <main>
-        <div className="tower">
-          {firstTower.map(bl => (
-            <div key={bl.id} className={bl.class}>
-              {bl.id}
-            </div>
-          ))}
-        </div>
-        <div className="tower">
-          {secondTower.map(bl => (
-            <div key={bl.id} className={bl.class}>
-              {bl.id}
-            </div>
-          ))}
-        </div>
-        <div className="tower">
-          {thirdTower.map(bl => (
-            <div key={bl.id} className={bl.class}>
-              {bl.id}
-            </div>
-          ))}
-        </div>
-      </main>
+      <>
+        <header><h1 className="pageTitle">Tower of Hanoi</h1></header>
+        <main>
+          {
+            towers.map((t, ti) => (
+              <div
+                key={ti}
+                onClick={() => {
+                  this.handleTowerClick(ti);
+                }}
+                className={`tower ${selectedTower === ti ? 'selected' : ''}`}
+              >
+                {
+                  t.map(b => (
+                    <div className={b.class} key={b.id}>{b.id}</div>
+                  ))
+                }
+              </div>
+            ))
+          }
+        </main>
+      </>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  selectedTower: state.selectedTower,
+  towers: state.towers,
+});
+const mapDispatchToProps = { selectTower };
+
+App.propTypes = {
+  selectedTower: PropTypes.number.isRequired,
+  towers: PropTypes.instanceOf(Array).isRequired,
+  selectTower: PropTypes.func.isRequired,
+};
+
+export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

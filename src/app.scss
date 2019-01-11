@@ -1,6 +1,19 @@
 body {
   background-color: #004400;
+  font-family: sans-serif;
   margin: 0;
+}
+
+header {
+
+  h1 {
+    background-color: #552700;
+    border: 2px solid #55AA55;
+    color: #55AA55;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+  }
 }
 
 main {
@@ -11,7 +24,8 @@ main {
 .tower {
   align-items: center;
   background-color: #552700;
-  border: 2px solid #440026;
+  border: 2px solid #552700;
+  border-top: none;
   color: #55AA55;
   cursor: pointer;
   display: flex;
@@ -22,8 +36,8 @@ main {
   transition: border-color 0.3s;
   width: 30%;
 
-  &:hover {
-    border-color: #804515;
+  &:hover, &.selected {
+    border-color: #55AA55;
   }
 
   > div {
