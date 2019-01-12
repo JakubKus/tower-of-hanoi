@@ -4,9 +4,9 @@ import { selectColumn } from './actions';
 import './app.scss';
 
 const App = ({ selectedColumn, columns, ...props }) => {
-  const canMoveDisk = (fromTower, toTower) => {
-    const fromTopDisk = fromTower.length > 0 ? fromTower[0] : false;
-    const toTopDisk = toTower.length > 0 ? toTower[0] : false;
+  const canMoveDisk = (fromColumn, toColumn) => {
+    const fromTopDisk = fromColumn.length > 0 ? fromColumn[0] : false;
+    const toTopDisk = toColumn.length > 0 ? toColumn[0] : false;
 
     if (fromTopDisk) {
       if (toTopDisk && toTopDisk.id > fromTopDisk.id) {
@@ -18,16 +18,16 @@ const App = ({ selectedColumn, columns, ...props }) => {
     return false;
   };
 
-  const handleTowerClick = (id) => {
+  const handleColumnClick = (id) => {
     if (selectedColumn < 0) {
       props.selectColumn(id);
     } else {
-      const fromTower = columns[selectedColumn];
-      const toTower = columns[id];
+      const fromColumn = columns[selectedColumn];
+      const toColumn = columns[id];
 
-      if (canMoveDisk(fromTower, toTower)) {
-        const disk = fromTower.shift();
-        toTower.unshift(disk);
+      if (canMoveDisk(fromColumn, toColumn)) {
+        const disk = fromColumn.shift();
+        toColumn.unshift(disk);
       }
 
       props.selectColumn(-1);
@@ -41,8 +41,8 @@ const App = ({ selectedColumn, columns, ...props }) => {
         {columns.map((t, ti) => (
           <div
             key={ti}
-            onClick={() => { handleTowerClick(ti); }}
-            className={`tower ${selectedColumn === ti ? 'selected' : ''}`}
+            onClick={() => { handleColumnClick(ti); }}
+            className={`column ${selectedColumn === ti ? 'selected' : ''}`}
           >
             {t.map(b => (
               <div className={b.class} key={b.id}>{b.id}</div>
