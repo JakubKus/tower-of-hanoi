@@ -1,29 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import { selectTower } from './actions';
+import { selectColumn } from './actions';
 import './app.scss';
 
-export class App extends Component {
-  handleTowerClick = (id) => {
-    const { selectedTower, towers } = this.props;
-
-    if (selectedTower < 0) {
-      this.props.selectTower(id);
-    } else {
-      const fromTower = towers[selectedTower];
-      const toTower = towers[id];
-
-      if (this.canMoveDisk(fromTower, toTower)) {
-        const disk = fromTower.shift();
-        toTower.unshift(disk);
-      }
-
-      this.props.selectTower(-1);
-    }
-  };
-
-  canMoveDisk = (fromTower, toTower) => {
+const App = ({ selectedColumn, columns, ...props }) => {
+  const canMoveDisk = (fromTower, toTower) => {
     const fromTopDisk = fromTower.length > 0 ? fromTower[0] : false;
     const toTopDisk = toTower.length > 0 ? toTower[0] : false;
 
@@ -37,46 +18,46 @@ export class App extends Component {
     return false;
   };
 
-  render() {
-    const { towers, selectedTower } = this.props;
+  const handleTowerClick = (id) => {
+    if (selectedColumn < 0) {
+      props.selectColumn(id);
+    } else {
+      const fromTower = columns[selectedColumn];
+      const toTower = columns[id];
 
-    return (
-      <>
-        <header><h1 className="pageTitle">Tower of Hanoi</h1></header>
-        <main>
-          {
-            towers.map((t, ti) => (
-              <div
-                key={ti}
-                onClick={() => {
-                  this.handleTowerClick(ti);
-                }}
-                className={`tower ${selectedTower === ti ? 'selected' : ''}`}
-              >
-                {
-                  t.map(b => (
-                    <div className={b.class} key={b.id}>{b.id}</div>
-                  ))
-                }
-              </div>
-            ))
-          }
-        </main>
-      </>
-    );
-  }
-}
+      if (canMoveDisk(fromTower, toTower)) {
+        const disk = fromTower.shift();
+        toTower.unshift(disk);
+      }
 
-const mapStateToProps = state => ({
-  selectedTower: state.selectedTower,
-  towers: state.towers,
-});
-const mapDispatchToProps = { selectTower };
+      props.selectColumn(-1);
+    }
+  };
 
-App.propTypes = {
-  selectedTower: PropTypes.number.isRequired,
-  towers: PropTypes.instanceOf(Array).isRequired,
-  selectTower: PropTypes.func.isRequired,
+  return (
+    <>
+      <header><h1 className="pageTitle">Tower of Hanoi</h1></header>
+      <main>
+        {columns.map((t, ti) => (
+          <div
+            key={ti}
+            onClick={() => { handleTowerClick(ti); }}
+            className={`tower ${selectedColumn === ti ? 'selected' : ''}`}
+          >
+            {t.map(b => (
+              <div className={b.class} key={b.id}>{b.id}</div>
+            ))}
+          </div>
+        ))}
+      </main>
+    </>
+  );
 };
 
-export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const mapStateToProps = state => ({
+  selectedColumn: state.selectedColumn,
+  columns: state.columns,
+});
+const mapDispatchToProps = { selectColumn };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

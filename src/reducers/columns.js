@@ -1,4 +1,4 @@
-export const towers = (state = [
+export const columns = (state = [
   [
     { id: 1, class: 'one' },
     { id: 2, class: 'two' },

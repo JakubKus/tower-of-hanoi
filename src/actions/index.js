@@ -1,4 +1,4 @@
-export const selectTower = id => ({
-  type: 'SELECT_TOWER',
+export const selectColumn = id => ({
+  type: 'SELECT_COLUMN',
   id,
 });
