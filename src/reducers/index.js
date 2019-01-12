@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { selectedTower } from './selectedTower';
-import { towers } from './towers';
+import { selectedColumn } from './selectedColumn';
+import { columns } from './columns';
 
 export default combineReducers({
-  selectedTower,
-  towers,
+  selectedColumn,
+  columns,
 });
