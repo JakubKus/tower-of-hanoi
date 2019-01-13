@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectColumn, didWrongMove } from './actions';
+import { selectColumn, incrementMovesCounter, didWrongMove } from './actions';
 import './app.scss';
 
 const App = ({
   columns,
   selectedColumn,
+  movesNumber,
   wrongMoveStatus,
   ...props
 }) => {
@@ -15,6 +16,7 @@ const App = ({
 
     if (fromTopDisk) {
       if (toTopDisk && toTopDisk.id > fromTopDisk.id) {
+        props.incrementMovesCounter(movesNumber);
         return true;
       }
 
@@ -23,6 +25,7 @@ const App = ({
         return false;
       }
 
+      props.incrementMovesCounter(movesNumber);
       return true;
     }
 
@@ -63,8 +66,9 @@ const App = ({
           </div>
         ))}
       </main>
+      <div className="movesCounter infoBox">{`Moves: ${movesNumber}`}</div>
       <div
-        className={wrongMoveStatus ? 'wrongMove on' : 'wrongMove off'}
+        className={`wrongMove infoBox ${wrongMoveStatus ? 'on' : 'off'}`}
       >
         {wrongMoveStatus}
       </div>
@@ -75,9 +79,10 @@ const App = ({
 const mapStateToProps = state => ({
   columns: state.columns,
   selectedColumn: state.selectedColumn,
+  movesNumber: state.movesNumber,
   wrongMoveStatus: state.wrongMoveStatus,
 });
 
-const mapDispatchToProps = { selectColumn, didWrongMove };
+const mapDispatchToProps = { selectColumn, incrementMovesCounter, didWrongMove };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
