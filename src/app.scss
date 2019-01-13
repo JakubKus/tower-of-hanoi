@@ -67,13 +67,16 @@ main {
   }
 }
 
-.wrongMove {
-   color: #55AA55;
-   font-size: 22px;
-   margin-top: 10px;
-   text-align: center;
+.infoBox {
+  background-color: #552700;
+  border: 2px solid;
+  color: #55AA55;
+  display: table;
+  font-size: 20px;
+  margin: 10px auto 0;
+  padding: 5px 20px;
+}
 
-  &.off {
-    display: none;
-  }
- }
+.wrongMove.off {
+  display: none;
+}
