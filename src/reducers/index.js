@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { selectedColumn } from './selectedColumn';
 import { columns } from './columns';
+import { selectedColumn } from './selectedColumn';
+import { wrongMoveStatus } from './wrongMoveStatus';
 
 export default combineReducers({
-  selectedColumn,
   columns,
+  selectedColumn,
+  wrongMoveStatus,
 });

@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectColumn } from './actions';
+import { selectColumn, didWrongMove } from './actions';
 import './app.scss';
 
-const App = ({ selectedColumn, columns, ...props }) => {
+const App = ({
+  columns,
+  selectedColumn,
+  wrongMoveStatus,
+  ...props
+}) => {
   const canMoveDisk = (fromColumn, toColumn) => {
     const fromTopDisk = fromColumn.length > 0 ? fromColumn[0] : false;
     const toTopDisk = toColumn.length > 0 ? toColumn[0] : false;
@@ -13,8 +18,15 @@ const App = ({ selectedColumn, columns, ...props }) => {
         return true;
       }
 
-      return !toTopDisk;
+      if (toTopDisk) {
+        props.didWrongMove('You must put smaller disk on bigger ones');
+        return false;
+      }
+
+      return true;
     }
+
+    props.didWrongMove('Cannot move disk from empty column');
     return false;
   };
 
@@ -26,6 +38,7 @@ const App = ({ selectedColumn, columns, ...props }) => {
       const toColumn = columns[id];
 
       if (canMoveDisk(fromColumn, toColumn)) {
+        props.didWrongMove(false);
         const disk = fromColumn.shift();
         toColumn.unshift(disk);
       }
@@ -50,14 +63,21 @@ const App = ({ selectedColumn, columns, ...props }) => {
           </div>
         ))}
       </main>
+      <div
+        className={wrongMoveStatus ? 'wrongMove on' : 'wrongMove off'}
+      >
+        {wrongMoveStatus}
+      </div>
     </>
   );
 };
 
 const mapStateToProps = state => ({
-  selectedColumn: state.selectedColumn,
   columns: state.columns,
+  selectedColumn: state.selectedColumn,
+  wrongMoveStatus: state.wrongMoveStatus,
 });
-const mapDispatchToProps = { selectColumn };
+
+const mapDispatchToProps = { selectColumn, didWrongMove };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

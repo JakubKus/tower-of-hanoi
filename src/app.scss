@@ -66,3 +66,14 @@ main {
     width: 90%;
   }
 }
+
+.wrongMove {
+   color: #55AA55;
+   font-size: 22px;
+   margin-top: 10px;
+   text-align: center;
+
+  &.off {
+    display: none;
+  }
+ }
