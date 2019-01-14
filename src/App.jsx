@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectColumn, incrementMovesCounter, didWrongMove } from './actions';
+import {
+  selectColumn,
+  incrementMovesCounter,
+  didWrongMove,
+  resetGame,
+} from './actions';
 import './app.scss';
 
 const App = ({
@@ -52,7 +57,9 @@ const App = ({
 
   return (
     <>
-      <header><h1 className="pageTitle">Tower of Hanoi</h1></header>
+      <header>
+        <h1 className="pageTitle" onClick={props.resetGame}>Tower of Hanoi</h1>
+      </header>
       <main>
         {columns.map((t, ti) => (
           <div
@@ -83,6 +90,11 @@ const mapStateToProps = state => ({
   wrongMoveStatus: state.wrongMoveStatus,
 });
 
-const mapDispatchToProps = { selectColumn, incrementMovesCounter, didWrongMove };
+const mapDispatchToProps = {
+  selectColumn,
+  incrementMovesCounter,
+  didWrongMove,
+  resetGame,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
