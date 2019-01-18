@@ -1,3 +1,7 @@
+export const closePopup = () => ({
+  type: 'CLOSE_POPUP',
+});
+
 export const selectColumn = id => ({
   type: 'SELECT_COLUMN',
   id,
@@ -25,4 +29,9 @@ export const resetGame = () => ({
     [],
     [],
   ],
+});
+
+export const showPopupVictory = () => ({
+  type: 'SHOW_POPUP_VICTORY',
+  text: 'Congratulations, you won! :)'
 });
