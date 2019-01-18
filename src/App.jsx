@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
+  closePopup,
   selectColumn,
   incrementMovesCounter,
   didWrongMove,
   resetGame,
+  showPopupVictory,
 } from './actions';
 import './app.scss';
 
 const App = ({
+  popup,
   columns,
   selectedColumn,
   movesNumber,
@@ -49,6 +52,10 @@ const App = ({
         props.didWrongMove(false);
         const disk = fromColumn.shift();
         toColumn.unshift(disk);
+
+        if (columns[0].length === 0 && columns[1].length === 0) {
+          props.showPopupVictory();
+        }
       }
 
       props.selectColumn(-1);
@@ -73,6 +80,9 @@ const App = ({
           </div>
         ))}
       </main>
+      <div className={`popup ${popup ? 'on' : 'off'}`}>
+        <span className="text" onClick={props.closePopup}>{popup}</span>
+      </div>
       <div className="movesCounter infoBox">{`Moves: ${movesNumber}`}</div>
       <div
         className={`wrongMove infoBox ${wrongMoveStatus ? 'on' : 'off'}`}
@@ -84,6 +94,7 @@ const App = ({
 };
 
 const mapStateToProps = state => ({
+  popup: state.popup,
   columns: state.columns,
   selectedColumn: state.selectedColumn,
   movesNumber: state.movesNumber,
@@ -91,10 +102,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  closePopup,
   selectColumn,
   incrementMovesCounter,
   didWrongMove,
   resetGame,
+  showPopupVictory,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
