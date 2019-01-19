@@ -1,4 +1,4 @@
-import React from 'react';
+import { CLOSE_POPUP, SHOW_POPUP_VICTORY } from "../actions/constants";
 
 const rules = "Welcome to Tower of Hanoi game! The goal is to move disks from" +
   " the first column to the third one. You can only put smaller disk on" +
@@ -6,9 +6,9 @@ const rules = "Welcome to Tower of Hanoi game! The goal is to move disks from" +
 
 export const popup = (state = rules, action) => {
   switch (action.type) {
-    case 'CLOSE_POPUP':
+    case CLOSE_POPUP:
       return false;
-    case 'SHOW_POPUP_VICTORY':
+    case SHOW_POPUP_VICTORY:
       return action.text;
     default:
       return state;

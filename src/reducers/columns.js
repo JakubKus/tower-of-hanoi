@@ -1,3 +1,5 @@
+import { RESET_GAME } from "../actions/constants";
+
 export const columns = (
   state = [
     [
@@ -12,7 +14,7 @@ export const columns = (
   action
 ) => {
   switch (action.type) {
-    case 'RESET_GAME':
+    case RESET_GAME:
       return action.columns;
     default:
       return state;
