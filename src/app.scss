@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #004400;
+  background-color: #316A85;
   font-family: sans-serif;
   margin: 0;
 }
@@ -12,9 +12,9 @@ body {
 header {
 
   h1 {
-    background-color: #552700;
-    border: 2px solid #55AA55;
-    color: #55AA55;
+    background-color: #ABC944;
+    border-bottom: 2px solid #316A85;
+    color: #316A85;
     cursor: pointer;
     margin: 0;
     padding: 10px 0;
@@ -31,10 +31,8 @@ main {
 
 .column {
   align-items: center;
-  background-color: #552700;
-  border: 2px solid #552700;
-  border-top: none;
-  color: #55AA55;
+  background-color: #39A939;
+  border: 2px solid #39A939;
   cursor: pointer;
   display: flex;
   flex-flow: column;
@@ -47,19 +45,20 @@ main {
 
   @media (min-width: 800px) {
     &:hover {
-      border-color: #55AA55;
+      border-color: #ABC944;
     }
   }
 
   &.selected {
-    border-color: #55AA55;
+    border-color: #ABC944;
   }
 
   > div {
     align-items: center;
     animation: move 0.5s ease-out;
-    background-color: #804515;
-    border: 2px solid #55AA55;
+    background-color: #ABC944;
+    border: 2px solid #316A85;
+    color: #316A85;
     display: flex;
     height: 8vh;
     justify-content: center;
@@ -87,7 +86,7 @@ main {
 
 .popup.on {
   align-items: center;
-  background: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.4);
   display: flex;
   height: 100%;
   justify-content: center;
@@ -98,10 +97,10 @@ main {
   z-index: 1;
 
   .text {
-    background: #804515;
-    border: 2px solid #55AA55;
+    background-color: #ABC944;
+    border: 2px solid #316A85;
     box-sizing: border-box;
-    color: #55AA55;
+    color: #316A85;
     cursor: pointer;
     font-size: 22px;
     max-width: 450px;
@@ -113,9 +112,8 @@ main {
 
 .infoBox {
   animation: move 0.5s ease-out;
-  background-color: #552700;
-  border: 2px solid;
-  color: #55AA55;
+  background-color: #ABC944;
+  color: #316A85;
   display: table;
   font-size: 20px;
   margin: 10px auto 0;
